@@ -104,4 +104,16 @@ class Hashmap {
 
     return false;
   }
+
+  length() {
+    let count = 0;
+
+    this.buckets.forEach((bucket) => {
+      if (bucket) {
+        count += bucket.length;
+      }
+    });
+
+    return count;
+  }
 }
