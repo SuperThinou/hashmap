@@ -61,4 +61,23 @@ class Hashmap {
 
     return null;
   }
+
+  has(key) {
+    const hashCode = this.hash(key);
+    const index = Math.abs(hashCode) % this.capacity;
+
+    if (!this.buckets[index]) {
+      return false;
+    }
+
+    for (let i = 0; i < this.buckets[index].length; i++) {
+      const entry = this.buckets[index][i];
+
+      if (entry.key === key) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 }
