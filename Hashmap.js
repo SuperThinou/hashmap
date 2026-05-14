@@ -21,6 +21,10 @@ class Hashmap {
     const index = hashCode % this.capacity;
 
     if (!this.buckets[index]) {
+      if (index < 0 || index >= buckets.length) {
+        throw new Error("Trying to access index out of bounds");
+      }
+
       this.buckets[index] = [];
     }
 
