@@ -18,7 +18,7 @@ class Hashmap {
 
   set(key, value) {
     const hashCode = this.hash(key);
-    const index = hashCode % this.capacity;
+    const index = Math.abs(hashCode) % this.capacity;
 
     if (!this.buckets[index]) {
       if (index < 0 || index >= buckets.length) {
@@ -41,5 +41,24 @@ class Hashmap {
       key: key,
       value: value,
     });
+  }
+
+  get(key) {
+    const hashCode = this.hash(key);
+    const index = Math.abs(hashCode) % this.capacity;
+
+    if (!this.buckets[index]) {
+      return null;
+    }
+
+    for (let i = 0; i < this.buckets[index].length; i++) {
+      const entry = this.buckets[index][i];
+
+      if (entry.key === key) {
+        return entry.value;
+      }
+    }
+
+    return null;
   }
 }
