@@ -2,8 +2,9 @@ class Hashmap {
   constructor(capacity = 16, loadFactor = 0.75) {
     this.capacity = capacity;
     this.loadFactor = loadFactor;
+    this.buckets = new Array(capacity);
   }
-  
+
   hash(key) {
     let hashCode = 0;
 
@@ -13,5 +14,28 @@ class Hashmap {
     }
 
     return hashCode;
+  }
+
+  set(key, value) {
+    const hashCode = this.hash(key);
+    const index = hashCode % this.capacity;
+
+    if (!this.buckets[index]) {
+      this.buckets[index] = [];
+    }
+
+    for (let i = 0; i < this.buckets[index].length; i++) {
+      const entry = this.buckets[index][i];
+
+      if (entry.key === key) {
+        entry.value = value;
+        return;
+      }
+    }
+
+    this.buckets[index].push({
+      key: key,
+      value: value,
+    });
   }
 }
