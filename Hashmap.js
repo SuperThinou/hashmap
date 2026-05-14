@@ -19,17 +19,18 @@ class Hashmap {
   set(key, value) {
     const hashCode = this.hash(key);
     const index = Math.abs(hashCode) % this.capacity;
+    const bucket = this.buckets[index];
 
-    if (!this.buckets[index]) {
+    if (!bucket) {
       if (index < 0 || index >= buckets.length) {
         throw new Error("Trying to access index out of bounds");
       }
 
-      this.buckets[index] = [];
+      bucket = [];
     }
 
-    for (let i = 0; i < this.buckets[index].length; i++) {
-      const entry = this.buckets[index][i];
+    for (let i = 0; i < bucket.length; i++) {
+      const entry = bucket[i];
 
       if (entry.key === key) {
         entry.value = value;
@@ -37,7 +38,7 @@ class Hashmap {
       }
     }
 
-    this.buckets[index].push({
+    bucket.push({
       key: key,
       value: value,
     });
@@ -46,8 +47,9 @@ class Hashmap {
   get(key) {
     const hashCode = this.hash(key);
     const index = Math.abs(hashCode) % this.capacity;
+    const bucket = this.buckets[index];
 
-    if (!this.buckets[index]) {
+    if (!bucket) {
       return null;
     }
 
@@ -65,15 +67,37 @@ class Hashmap {
   has(key) {
     const hashCode = this.hash(key);
     const index = Math.abs(hashCode) % this.capacity;
+    const bucket = this.buckets[index];
 
-    if (!this.buckets[index]) {
+    if (!bucket) {
       return false;
     }
 
     for (let i = 0; i < this.buckets[index].length; i++) {
-      const entry = this.buckets[index][i];
+      const entry = bucket[i];
 
       if (entry.key === key) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  remove(key) {
+    const hashCode = this.hash(key);
+    const index = Math.abs(hashCode) % this.capacity;
+    const bucket = this.buckets[index];
+
+    if (!bucket) {
+      return false;
+    }
+
+    for (let i = 0; i < bucket.length; i++) {
+      const entry = bucket[i];
+
+      if (entry.key === key) {
+        bucket.splice(i, 1);
         return true;
       }
     }
