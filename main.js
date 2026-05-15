@@ -21,3 +21,9 @@ console.log(test.buckets);
 test.set("apple", "green");
 test.set("banana", "green");
 console.log(test.buckets);
+
+// Load factor exceedance test
+test.set("moon", "silver");
+test.set("car", "black");
+test.set("sky", "blue");
+test.set("grass", "green");
