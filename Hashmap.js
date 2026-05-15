@@ -134,4 +134,18 @@ class Hashmap {
 
     return arr;
   }
+
+  values() {
+    const arr = [];
+
+    this.buckets.forEach((bucket) => {
+      if (bucket) {
+        bucket.forEach((entry) => {
+          arr.push(entry.value);
+        });
+      }
+    });
+
+    return arr;
+  }
 }
