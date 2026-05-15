@@ -120,4 +120,18 @@ class Hashmap {
   clear() {
     this.buckets = new Array(this.capacity);
   }
+
+  keys() {
+    const arr = [];
+
+    this.buckets.forEach((bucket) => {
+      if (bucket) {
+        bucket.forEach((entry) => {
+          arr.push(entry.key);
+        });
+      }
+    });
+
+    return arr;
+  }
 }
