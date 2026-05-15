@@ -3,6 +3,7 @@ export class Hashmap {
     this.capacity = capacity;
     this.loadFactor = loadFactor;
     this.buckets = new Array(capacity);
+    this.size = 0;
   }
 
   hash(key) {
@@ -14,6 +15,17 @@ export class Hashmap {
     }
 
     return hashCode;
+  }
+
+  _rehashSet(key, value) {
+    const hashCode = this.hash(key);
+    const index = Math.abs(hashCode) % this.capacity;
+
+    if (!this.buckets[index]) {
+      this.buckets[index] = [];
+    }
+
+    this.buckets[index].push({ key, value });
   }
 
   set(key, value) {
@@ -43,6 +55,14 @@ export class Hashmap {
       key: key,
       value: value,
     });
+
+    // Load factor check
+    this.size++;
+
+    if (this.size / this.capacity > this.loadFactor) {
+      this.resize();
+      console.log("Resized! Buckets capacity is now: " + this.capacity);
+    }
   }
 
   get(key) {
@@ -162,5 +182,23 @@ export class Hashmap {
     });
 
     return arr;
+  }
+
+  resize() {
+    const oldBuckets = this.buckets;
+
+    this.capacity = this.capacity * 2;
+    this.buckets = new Array(this.capacity);
+
+    for (let i = 0; i < oldBuckets.length; i++) {
+      const bucket = oldBuckets[i];
+
+      if (bucket) {
+        for (let j = 0; j < bucket.length; j++) {
+          const entry = bucket[j];
+          this._rehashSet(entry.key, entry.value);
+        }
+      }
+    }
   }
 }
