@@ -1,6 +1,6 @@
-import { Hashmap } from "./Hashmap";
+import { Hashmap } from "./Hashmap.js";
 
-const test = new HashMap();
+const test = new Hashmap();
 
 test.set("apple", "red");
 test.set("banana", "yellow");
@@ -15,4 +15,6 @@ test.set("jacket", "blue");
 test.set("kite", "pink");
 test.set("lion", "golden");
 
-console.log(test);
+console.log(test.buckets);
+
+

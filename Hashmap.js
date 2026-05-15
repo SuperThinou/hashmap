@@ -19,15 +19,16 @@ export class Hashmap {
   set(key, value) {
     const hashCode = this.hash(key);
     const index = Math.abs(hashCode) % this.capacity;
-    const bucket = this.buckets[index];
 
-    if (!bucket) {
-      if (index < 0 || index >= buckets.length) {
-        throw new Error("Trying to access index out of bounds");
-      }
-
-      bucket = [];
+    if (index < 0 || index >= this.capacity) {
+      throw new Error("Trying to access index out of bounds");
     }
+
+    if (!this.buckets[index]) {
+      this.buckets[index] = [];
+    }
+
+    const bucket = this.buckets[index];
 
     for (let i = 0; i < bucket.length; i++) {
       const entry = bucket[i];
