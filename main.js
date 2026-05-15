@@ -57,7 +57,7 @@ console.log(test.keys());
 console.log(test.values());
 
 // entries function test
-console.log(test.entries);
+console.log(test.entries());
 
 test.clear();
 console.log(test.buckets);
