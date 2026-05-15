@@ -155,10 +155,7 @@ class Hashmap {
     this.buckets.forEach((bucket) => {
       if (bucket) {
         bucket.forEach((entry) => {
-          const pair = [];
-          pair.push(entry.key);
-          pair.push(entry.value);
-          arr.push(pair);
+          arr.push([entry.key, entry.value]);
         });
       }
     });
