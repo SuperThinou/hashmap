@@ -148,4 +148,21 @@ class Hashmap {
 
     return arr;
   }
+
+  entries() {
+    const arr = [];
+
+    this.buckets.forEach((bucket) => {
+      if (bucket) {
+        bucket.forEach((entry) => {
+          const pair = [];
+          pair.push(entry.key);
+          pair.push(entry.value);
+          arr.push(pair);
+        });
+      }
+    });
+
+    return arr;
+  }
 }
