@@ -116,4 +116,8 @@ class Hashmap {
 
     return count;
   }
+
+  clear() {
+    this.buckets = new Array(this.capacity);
+  }
 }
