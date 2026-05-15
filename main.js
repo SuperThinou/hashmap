@@ -17,4 +17,7 @@ test.set("lion", "golden");
 
 console.log(test.buckets);
 
-
+// Overwrite values test
+test.set("apple", "green");
+test.set("banana", "green");
+console.log(test.buckets);
