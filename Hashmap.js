@@ -74,8 +74,8 @@ export class Hashmap {
       return null;
     }
 
-    for (let i = 0; i < this.buckets[index].length; i++) {
-      const entry = this.buckets[index][i];
+    for (let i = 0; i < bucket.length; i++) {
+      const entry = bucket[i];
 
       if (entry.key === key) {
         return entry.value;
@@ -94,7 +94,7 @@ export class Hashmap {
       return false;
     }
 
-    for (let i = 0; i < this.buckets[index].length; i++) {
+    for (let i = 0; i < bucket.length; i++) {
       const entry = bucket[i];
 
       if (entry.key === key) {

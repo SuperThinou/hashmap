@@ -28,4 +28,10 @@ test.set("car", "black");
 test.set("sky", "blue");
 test.set("grass", "green");
 
+// console.log(test.buckets);
+
+// Remove function test
+test.remove("moon");
+test.remove("apple");
+
 console.log(test.buckets);
