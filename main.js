@@ -1,3 +1,5 @@
+import { Hashmap } from "./Hashmap";
+
 const test = new HashMap();
 
 test.set("apple", "red");
