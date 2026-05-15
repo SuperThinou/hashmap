@@ -119,6 +119,9 @@ export class Hashmap {
 
       if (entry.key === key) {
         bucket.splice(i, 1);
+        this.size--;
+        console.log("Number of elements: " + this.size);
+        console.log("capacity: " + this.capacity);
         return true;
       }
     }
@@ -127,19 +130,14 @@ export class Hashmap {
   }
 
   length() {
-    let count = 0;
-
-    this.buckets.forEach((bucket) => {
-      if (bucket) {
-        count += bucket.length;
-      }
-    });
-
-    return count;
+    return this.size;
   }
 
   clear() {
     this.buckets = new Array(this.capacity);
+    this.size = 0;
+    console.log("Number of elements: " + this.size);
+    console.log("capacity: " + this.capacity);
   }
 
   keys() {
